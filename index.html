@@ -69,7 +69,11 @@
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-Q2NDYJX0HD');
+        if (window.location.hostname === "localhost" || window.location.pathname.startsWith("/test.")) {
+            gtag('config', 'G-Q2NDYJX0HD', { 'debug_mode': true });
+        } else {
+            gtag('config', 'G-Q2NDYJX0HD');
+        }
     </script>
     <link rel="stylesheet" href="style.css">
     <script type="module" src="src/App.fs.js"></script>
