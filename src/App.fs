@@ -1,11 +1,12 @@
-// taidalog's portfolio Version 1.0.1
+// taidalog's portfolio
 // https://github.com/taidalog/taidalog.github.io
-// Copyright (c) 2023-2024 taidalog
+// Copyright (c) 2023-2025 taidalog
 // This software is licensed under the MIT License.
 // https://github.com/taidalog/taidalog.github.io/blob/main/LICENSE
 
 namespace TaidalogsPortfolio
 
+open System
 open Browser.Dom
 open Browser.Types
 open Fable.Core
@@ -47,11 +48,9 @@ module App =
             // keyboard shortcut
             document.onkeydown <- fun (e: KeyboardEvent) -> keyboardshortcut e
 
-            (document.getElementById "snowSection")
-                .setAttribute ("width", string document.body.clientWidth)
+            (document.getElementById "snowSection").setAttribute ("width", string document.body.clientWidth)
 
-            (document.getElementById "snowSection")
-                .setAttribute ("height", string document.body.scrollHeight)
+            (document.getElementById "snowSection").setAttribute ("height", string document.body.scrollHeight)
 
             // snow falling
             [ 0..17 ] |> List.iter (fun _ -> fall false)
@@ -86,7 +85,14 @@ module App =
                     (document.getElementById "umbrellaOpen").classList.toggle "display-none"
                     |> ignore
 
-                    [ 0..17 ] |> List.iter (fun _ -> fall false))
+                    [ 0..17 ] |> List.iter (fun _ -> fall false)
+
+            let today = DateTime.Today
+            if today.Month = 3 || (today.Month = 4 && today.Day < 8) then
+                document.body.classList.add "spring"
+                (document.getElementById "fsharpDescriptionVariable").innerText <- "このページの桜もF#で舞わせています。"
+            else
+                (document.getElementById "fsharpDescriptionVariable").innerText <- "このページの雪もF#で降らせています。")
     )
 
     window.onresize <-

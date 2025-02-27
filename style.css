@@ -1,7 +1,7 @@
 /*
-  taidalog's portfolio Version 1.0.1
+  taidalog's portfolio
   https://github.com/taidalog/taidalog.github.io
-  Copyright (c) 2023-2024 taidalog
+  Copyright (c) 2023-2025 taidalog
   This software is licensed under the MIT License.
   https://github.com/taidalog/taidalog.github.io/blob/main/LICENSE
 */
@@ -71,6 +71,14 @@
     }
 }
 
+body.spring {
+    --snowflake-0: hsl(308, 50%, 70%);
+    --snowflake-1: hsl(308, 60%, 75%);
+    --snowflake-2: hsl(308, 70%, 80%);
+    --snowflake-3: hsl(308, 50%, 40%);
+    --snowflake-4: hsl(98, 50%, 70%);
+    --snowflake-5: #cccccc;
+}
 html,
 body {
     height: 100%;
@@ -338,6 +346,27 @@ svg.snow-svg>text.italic {
     font-style: italic;
 }
 
+/*
+ *"Annapurna SIL" is licensed under the SIL Open Font License, Version 1.1 .
+ * https://openfontlicense.org/open-font-license-official-text/
+ * https://fonts.google.com/specimen/Annapurna+SIL/license?query=Annapurna+SIL
+ */
+body.spring svg.snow-svg>text {
+    font-family: "Annapurna SIL", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/*
+ *"Annapurna SIL" is licensed under the SIL Open Font License, Version 1.1 .
+ * https://openfontlicense.org/open-font-license-official-text/
+ * https://fonts.google.com/specimen/Annapurna+SIL/license?query=Annapurna+SIL
+ */
+body.spring svg.snow-svg>text.italic {
+    font-family: "Annapurna SIL", serif;
+    font-weight: 400;
+    font-style: normal;
+}
 svg.snow-svg>text.snowflake-color-0 {
     fill: var(--snowflake-0);
 }
