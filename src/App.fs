@@ -1,6 +1,6 @@
 // taidalog's portfolio
 // https://github.com/taidalog/taidalog.github.io
-// Copyright (c) 2023-2025 taidalog
+// Copyright (c) 2023-2026 taidalog
 // This software is licensed under the MIT License.
 // https://github.com/taidalog/taidalog.github.io/blob/main/LICENSE
 
@@ -14,25 +14,6 @@ open Fable.Core.JsInterop
 open SnowFlake
 
 module App =
-
-    let keyboardshortcut (e: KeyboardEvent) =
-        let popupCheck = document.getElementById "popupCheck" :?> HTMLInputElement
-        let informationPolicyWindow = document.getElementById "informationPolicyWindow"
-
-        let isInformationPolicyWindowActive =
-            informationPolicyWindow.classList
-            |> (fun x -> JS.Constructors.Array?from(x))
-            |> Array.contains "active"
-
-        match e.key with
-        | "Escape" ->
-            if isInformationPolicyWindowActive then
-                informationPolicyWindow.classList.remove "active"
-
-            if popupCheck.checked then
-                popupCheck.checked <- false
-        | _ -> ()
-
     window.addEventListener (
         "DOMContentLoaded",
         (fun _ ->
@@ -40,13 +21,11 @@ module App =
             (document.getElementById "informationPolicyLink").onclick <-
                 fun event ->
                     event.preventDefault ()
-                    (document.getElementById "informationPolicyWindow").classList.add "active"
+                    (document.getElementById "informationPolicyWindow")?togglePopover ()
 
-            (document.getElementById "informationPolicyClose").onclick <-
-                fun _ -> (document.getElementById "informationPolicyWindow").classList.remove "active"
-
-            // keyboard shortcut
-            document.onkeydown <- fun (e: KeyboardEvent) -> keyboardshortcut e
+            // regex explanation popover
+            (document.getElementById "regexExplanationSpan").onclick <-
+                fun _ -> (document.getElementById "regexExplanation")?togglePopover ()
 
             (document.getElementById "snowSection").setAttribute ("width", string document.body.clientWidth)
 
@@ -88,10 +67,12 @@ module App =
                     [ 0..17 ] |> List.iter (fun _ -> fall false)
 
             let today = DateTime.Today
-            if today.Month = 3 || (today.Month = 4 && today.Day < 8) then
+
+            if (today.Month = 3 && today.Day = 1) || (today.Month = 4 && today.Day < 8) then
                 document.body.classList.add "spring"
                 (document.getElementById "fsharpDescriptionVariable").innerText <- "このページの桜もF#で舞わせています。"
             else
+                document.body.classList.remove "spring"
                 (document.getElementById "fsharpDescriptionVariable").innerText <- "このページの雪もF#で降らせています。")
     )
 

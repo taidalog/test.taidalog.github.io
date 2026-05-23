@@ -1,6 +1,6 @@
 // taidalog's portfolio
 // https://github.com/taidalog/taidalog.github.io
-// Copyright (c) 2023-2025 taidalog
+// Copyright (c) 2023-2026 taidalog
 // This software is licensed under the MIT License.
 // https://github.com/taidalog/taidalog.github.io/blob/main/LICENSE
 

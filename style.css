@@ -1,7 +1,7 @@
 /*
   taidalog's portfolio
   https://github.com/taidalog/taidalog.github.io
-  Copyright (c) 2023-2025 taidalog
+  Copyright (c) 2023-2026 taidalog
   This software is licensed under the MIT License.
   https://github.com/taidalog/taidalog.github.io/blob/main/LICENSE
 */
@@ -21,7 +21,6 @@
     /* 4.53, AA */
     --a-visited-color: #754488;
     /* 7.15, AAA */
-    --help-window-background-color: var(--background-color);
     --help-window-box-shadow: #999999;
     --snowflake-0: #83b0df;
     /* 2.27, ! */
@@ -79,6 +78,7 @@ body.spring {
     --snowflake-4: hsl(98, 50%, 70%);
     --snowflake-5: #cccccc;
 }
+
 html,
 body {
     height: 100%;
@@ -187,19 +187,12 @@ main {
 
 footer {
     color: var(--pale-color);
-    margin: 40px auto 20px;
-}
-
-footer>div {
-    margin: 10px 0 20px;
+    margin: 50px auto 40px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-footer div.footer-item {
-    margin: 0 0.75em;
+    gap: 1.5em;
 }
 
 footer a {
@@ -214,80 +207,11 @@ footer a:visited {
 @media (max-width: 799px) {
     footer {
         margin-top: 20px;
-    }
-
-    footer>div {
         width: 100%;
         flex-direction: column;
+        align-items: center;
+        gap: 0.5em;
     }
-
-    footer div.footer-item {
-        margin: 0 auto;
-    }
-}
-
-/*
-    help window
-    information policy window
-*/
-span.help-button,
-span.help-close {
-    font-size: 24px;
-    cursor: pointer;
-}
-
-div.help-close-outer {
-    width: 100%;
-    text-align: right;
-}
-
-div.help-window {
-    display: none;
-}
-
-div.help-window.active,
-input.popup-check:checked~div.popup-window {
-    display: block;
-    background-color: var(--help-window-background-color);
-    border-radius: 10px;
-    opacity: 0.95;
-    width: fit-content;
-    height: fit-content;
-    max-width: 80%;
-    max-height: 80%;
-    position: fixed;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    padding: 0 2rem 2rem 2rem;
-    box-shadow: 0px 0px 5px 1px var(--help-window-box-shadow);
-    overflow-y: auto;
-    scrollbar-width: thin;
-}
-
-div.help-window h2 {
-    font-family: 'Zen Kaku Gothic New', sans-serif;
-}
-
-div.help-window a {
-    color: var(--a-color);
-}
-
-div.help-window a:visited {
-    color: var(--a-visited-color);
-}
-
-span.material-symbols-outlined:hover {
-    font-variation-settings:
-        'FILL' 1
-}
-
-span.material-symbols-outlined.help-close:hover {
-    color: var(--background-color);
-    background-color: var(--text-color);
 }
 
 a>picture>img,
@@ -367,6 +291,7 @@ body.spring svg.snow-svg>text.italic {
     font-weight: 400;
     font-style: normal;
 }
+
 svg.snow-svg>text.snowflake-color-0 {
     fill: var(--snowflake-0);
 }
@@ -506,16 +431,73 @@ div.work-note {
     grid-area: work-note;
 }
 
-label.popup-label {
-    cursor: pointer;
+/*
+    for dialog (popover)
+*/
+dialog {
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    opacity: 0.95;
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+    box-shadow: 0px 0px 5px 1px var(--help-window-box-shadow);
+    overflow-y: hidden;
 }
 
-input.popup-check,
-div.popup-window {
-    display: none;
+dialog::backdrop {
+    background-color: rgb(var(--background-color) / 0.5);
+    backdrop-filter: blur(3px);
 }
 
-div.popup-window>div {
+dialog>div {
+    padding: 0;
+    display: grid;
+    grid-template-rows: repeat(auto, minmax(200px, 1fr));
+}
+
+dialog>div>header {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
+    width: 100%;
+    height: fit-content;
+}
+
+dialog>div>header>button {
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+}
+
+dialog>div>header>button:hover {
+    color: var(--background-color);
+    background-color: var(--text-color);
+}
+
+dialog>div>div {
+    padding: 0 2rem 1rem 2rem;
+    max-width: 80vw;
+    max-height: 60vh;
+    overflow-y: scroll;
+}
+
+@media (max-width: 799px) {
+    dialog>div>div {
+        max-width: 70vw;
+    }
+}
+
+dialog h2 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+span.regex-explanation-span {
+    cursor: pointer;
 }
